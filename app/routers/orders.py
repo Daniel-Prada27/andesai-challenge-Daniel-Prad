@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from services.orders import get_orders, create_order
-from models import Order
+from app.services.orders import get_orders, create_order
+from app.models import Order
 
 router = APIRouter()
 
