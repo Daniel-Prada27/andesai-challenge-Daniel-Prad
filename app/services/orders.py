@@ -41,4 +41,5 @@ def create_order(order):
 
 def get_orders():
     df = load_orders()
+    df['date'] = df['date'].dt.date
     return df.to_dict(orient='records')
