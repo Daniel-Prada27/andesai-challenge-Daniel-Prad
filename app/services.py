@@ -68,6 +68,11 @@ def get_stock_coverage(days: int = 7):
     df_items = load_items()
     df_orders = load_orders()
 
+    if df_orders.empty:
+        return {"message": "No orders recorded yet", "coverage": []}
+    if df_items.empty:
+        return {"message": "No items recorded yet", "coverage": []}
+
     start_date = datetime.now().date() - timedelta(days=days)
 
     today = datetime.now()
