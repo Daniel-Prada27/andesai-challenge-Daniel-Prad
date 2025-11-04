@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
-from models import Item, OrderItem, Order
-from services import create_item, create_order, get_items, get_orders
+from typing import Union
+from models import Item, Order
+from services import create_item, create_order, get_items, get_orders, get_stock_coverage
 
 app = FastAPI()
 
@@ -28,5 +29,12 @@ def add_item(item: Item):
 def add_order(order: Order):
     try:
         return create_order(order)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get('/kpi/stock-coverage')
+def read_stock_coverage(days: Union[int, None] = 7):
+    try:
+        return get_stock_coverage(days)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

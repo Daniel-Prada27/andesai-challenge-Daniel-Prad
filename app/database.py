@@ -14,7 +14,7 @@ def save_items(df):
     df.to_csv(ITEMS_PATH, index=False)
 
 def load_orders():
-    return pd.read_csv(ORDERS_PATH)
+    return pd.read_csv(ORDERS_PATH, parse_dates=['date'], dtype={'order_id': str, 'sku': str})
 
 def save_orders(df):
     df.to_csv(ORDERS_PATH, index=False)
