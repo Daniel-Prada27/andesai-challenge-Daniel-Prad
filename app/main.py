@@ -9,15 +9,15 @@ app = FastAPI()
 def root():
     return {"message": "Hello World"}
 
-@app.get("/items/")
+@app.get("/items")
 def read_items():
     return get_items()
 
-@app.get("/orders/")
+@app.get("/orders")
 def read_orders():
     return get_orders()
 
-@app.post("/items/")
+@app.post("/items")
 def add_item(item: Item):
     try:
         sku = create_item(item)
@@ -25,7 +25,7 @@ def add_item(item: Item):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.post("/orders/")
+@app.post("/orders")
 def add_order(order: Order):
     try:
         return create_order(order)
